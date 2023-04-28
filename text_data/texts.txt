@@ -381,7 +381,7 @@ Manual reporting and data entry takes much of your team’s time and resources. 
 
 Instead, you can automate the process and get insightful cross-channel dashboards with real-time data. Improvado can source data from 500+ sources (including a TikTok integration). Then, it cleans your data from duplicates and any redundant data entries that are common when exporting data via APIs.
 
-After a quick setup you can choose one of Improvado’s dashboard templates that aligns with your marketing goals and analyze how your campaigns perform, which platforms drive the highest ROI, and what you can do to improve your cross-channel performance. Reach out to Improvado's team today to find out more. 
+After a quick setup you can choose one of Improvado’s dashboard templates that aligns with your marketing goals and analyze how your campaigns perform, which platforms drive the highest ROI, and what you can do to improve your cross-channel performance.  
 
 
 
@@ -507,7 +507,7 @@ Manual reporting and data collection is a pain in the neck for every marketing t
 
 However, it doesn’t have to be that way. You can automate the process and get insightful cross-channel dashboards with real-time data. Improvado streamlines data from 500+ sources (including a Twitter Ads integration). Then, it cleans your data from duplicates and any redundant data entries that are common when exporting data via third-party APIs.
 
-After connecting your data sources you can choose one of Improvado’s dashboard templates that fits your business needs. Improvado will automatically populate the template with data so you can instantly start analyzing how your campaigns perform, which platforms drive the highest ROI, and what you can do to improve your cross-channel performance. Reach out to Improvado's team today to find out more. 
+After connecting your data sources you can choose one of Improvado’s dashboard templates that fits your business needs. Improvado will automatically populate the template with data so you can instantly start analyzing how your campaigns perform, which platforms drive the highest ROI, and what you can do to improve your cross-channel performance.  
 
 
 

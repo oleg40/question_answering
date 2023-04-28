@@ -26,19 +26,16 @@ def find_words(query):
 
             else:
                 if lemmatizer.lemmatize(query_word.lower()) in sentence_wo_stopwords:
-                    # print(lemmatizer.lemmatize(query_word))
                     best_sent[sentence] = best_sent.get(sentence, 0) + 1
-    # print(f"best sent: {best_sent}")
     try:
         best_match_sent = max(best_sent, key=best_sent.get)
         # Adding the next sentense as well just in case
         result = f"{best_match_sent.capitalize()} {sentences[sentences.index(best_match_sent) + 1].capitalize()}"
-        # print(f"\n \n \n \n best sent: {best_sent}")
         return result
     except ValueError:
         return "Sorry, I don't know the answer"
 
 
-your_question = "What are the types of data validation?"
+your_question = input("Enter your question: ")
 print(find_words(your_question))
-# print(stopwords.words('english'))
+
