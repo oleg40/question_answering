@@ -1,46 +1,44 @@
-import os
-from nltk.tokenize import word_tokenize
+import nltk
 from nltk.corpus import stopwords
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
+from nltk.stem import WordNetLemmatizer
 
-# Load the texts and preprocess
-text_dir = 'text_data'
-texts = []
-for file in os.listdir(text_dir):
-    if file.endswith('.txt'):
-        with open(os.path.join(text_dir, file), 'r', encoding='utf-8') as f:
-            text = f.read().lower()
-            text = ' '.join([word for word in word_tokenize(text) if word not in stopwords.words('english')])
-            texts.append(text)
+corpus = []
+directory = "text_data"
+with open("text_data/texts.txt", "r", encoding="utf-8") as filename:
+    corpus = filename.read()
 
-# Create a corpus
-corpus = '\n'.join(texts)
 
-# Tokenize the corpus
-tfidf_vectorizer = TfidfVectorizer()
-tfidf_matrix = tfidf_vectorizer.fit_transform([corpus])
+sentences = nltk.sent_tokenize(corpus.lower())
 
-# Process the questions
-def process_question(question):
-    question = question.lower()
-    question = ' '.join([word for word in word_tokenize(question) if word not in stopwords.words('english')])
-    return question
 
-# Search and match
-def search_and_match(question):
-    question = process_question(question)
-    question_tfidf = tfidf_vectorizer.transform([question])
-    similarity_scores = cosine_similarity(question_tfidf, tfidf_matrix)[0]
-    max_index = similarity_scores.argmax()
-    return texts[max_index]
+def find_words(query):
+    # Matches words from user's query with sentences from texts
+    query_words = nltk.word_tokenize(query)
+    lemmatizer = WordNetLemmatizer()
+    best_sent = {}
+    for sentence in sentences:
+        for query_word in query_words:
+            # Lemmatizing both query and texts and avoiding the most common and useless words
+            sentence_wo_stopwords = [lemmatizer.lemmatize(text_word) for text_word in nltk.word_tokenize(sentence) if text_word not in stopwords.words('english') and text_word != "?"]
+            if query_word[0].isupper() and lemmatizer.lemmatize(query_word.lower()) in sentence_wo_stopwords:
+                best_sent[sentence] = best_sent.get(sentence, 0) + 1000
+                # print(lemmatizer.lemmatize(query_word))
 
-# Answer the question
-def answer_question(question):
-    answer = search_and_match(question)
-    return answer
+            else:
+                if lemmatizer.lemmatize(query_word.lower()) in sentence_wo_stopwords:
+                    # print(lemmatizer.lemmatize(query_word))
+                    best_sent[sentence] = best_sent.get(sentence, 0) + 1
+    # print(f"best sent: {best_sent}")
+    try:
+        best_match_sent = max(best_sent, key=best_sent.get)
+        # Adding the next sentense as well just in case
+        result = f"{best_match_sent.capitalize()} {sentences[sentences.index(best_match_sent) + 1].capitalize()}"
+        # print(f"\n \n \n \n best sent: {best_sent}")
+        return result
+    except ValueError:
+        return "Sorry, I don't know the answer"
 
-# Example usage
-question = "Reporting efforts?"
-answer = answer_question(question)
-print(answer)
+
+your_question = "What are the types of data validation?"
+print(find_words(your_question))
+# print(stopwords.words('english'))
